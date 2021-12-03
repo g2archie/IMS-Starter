@@ -84,5 +84,4 @@ public class OrderController implements CrudController<Order> {
 		Long id = utils.getLong();
 		return orderDAO.delete(id);
 	}
-
 }

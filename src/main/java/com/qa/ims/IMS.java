@@ -11,6 +11,7 @@ import com.qa.ims.persistence.domain.Domain;
 import com.qa.ims.utils.DBUtils;
 import com.qa.ims.utils.Utils;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -68,6 +69,12 @@ public class IMS {
 			case ORDER:
 				active = this.orders;
 				break;
+			case INIT:
+				File file = new File("src/main/resources/sql-schema.sql");
+				String schemaPath = file.getAbsolutePath();
+				int fileModified = DBUtils.connect().init(schemaPath);
+				LOGGER.info("Number of SQL file executed: " + fileModified);
+				return;
 			case STOP:
 				return;
 			default:
