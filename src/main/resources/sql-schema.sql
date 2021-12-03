@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS `ims`.`orders` (
     `order_date` TIMESTAMP,
     `cust_id` INT NOT NULL,
     PRIMARY KEY (`order_id`),
-    FOREIGN KEY (`cust_id`) REFERENCES customers(`cust_id`)
+    FOREIGN KEY (`cust_id`) REFERENCES customers(`cust_id`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS `ims`.`items` (
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `ims`.`orderitems` (
     `order_id` INT NOT NULL,
     `item_id` INT NOT NULL,
     PRIMARY KEY (`ord_it_id`),
-    FOREIGN KEY (`order_id`) REFERENCES orders(`order_id`),
-    FOREIGN KEY (`item_id`) REFERENCES items(`item_id`)
+    FOREIGN KEY (`order_id`) REFERENCES orders(`order_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (`item_id`) REFERENCES items(`item_id`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
