@@ -31,9 +31,10 @@ public class IMS {
 		final OrderDAO orderDAO = new OrderDAO();
 		DBUtils.connect();
 		DBUtils.getInstance().executeSQLFile("C:\\Users\\Admin\\IdeaProjects\\IMS-Starter\\src\\main\\resources\\sql-schema.sql");
+		DBUtils.getInstance().executeSQLFile("C:\\Users\\Admin\\IdeaProjects\\IMS-Starter\\src\\main\\resources\\sql-data.sql");
 		this.customers = new CustomerController(custDAO, utils);
 		this.items = new ItemController(itemDAO, utils);
-		this.orders = new OrderController(orderDAO, utils);
+		this.orders = new OrderController(orderDAO, custDAO, utils);
 	}
 
 	public void imsSystem() {

@@ -1,5 +1,6 @@
 package com.qa.ims.persistence.dao;
 
+import com.qa.ims.persistence.domain.Customer;
 import com.qa.ims.persistence.domain.Order;
 import com.qa.ims.utils.DBUtils;
 import org.apache.logging.log4j.LogManager;
@@ -42,7 +43,7 @@ public class OrderDAO implements Dao<Order> {
     private Order readLatest() {
         try (Connection connection = DBUtils.getInstance().getConnection();
              Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery("SELECT * FROM orders ORDER BY id DESC LIMIT 1");) {
+             ResultSet resultSet = statement.executeQuery("SELECT * FROM orders ORDER BY order_id DESC LIMIT 1");) {
             resultSet.next();
             return modelFromResultSet(resultSet);
         } catch (Exception e) {
@@ -96,7 +97,7 @@ public class OrderDAO implements Dao<Order> {
     public Order update(Order order) {
         try (Connection connection = DBUtils.getInstance().getConnection();
              PreparedStatement statement = connection
-                     .prepareStatement("UPDATE items SET cust_id = ?, order_date = ? WHERE order_id = ?");) {
+                     .prepareStatement("UPDATE orders SET cust_id = ?, order_date = ? WHERE order_id = ?");) {
             statement.setLong(1, order.getCustomerId());
             statement.setDate(2, order.getOrderDate());
             statement.setLong(3, order.getOrderId());

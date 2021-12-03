@@ -3,6 +3,7 @@ package com.qa.ims.persistence.domain;
 
 import java.sql.Date;
 import java.util.Calendar;
+import java.util.Objects;
 
 public class Order {
     private Long orderId;
@@ -50,5 +51,23 @@ public class Order {
 
     public void setOrderDate(Date orderDate) {
         this.orderDate = orderDate;
+    }
+
+    @Override
+    public String toString() {
+        return "orderId: " + orderId + " cust_id: " +  customerId + " orderDate: " + orderDate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Order order = (Order) o;
+        return orderId.equals(order.orderId) && customerId.equals(order.customerId) && orderDate.equals(order.orderDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(orderId, customerId, orderDate);
     }
 }
