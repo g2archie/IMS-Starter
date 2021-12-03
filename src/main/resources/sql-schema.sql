@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `ims`.`orderitems` (
     `order_id` INT NOT NULL,
     `item_id` INT NOT NULL,
     PRIMARY KEY (`ord_it_id`),
-    FOREIGN KEY (`order_id`) REFERENCES order(`order_id`),
+    FOREIGN KEY (`order_id`) REFERENCES orders(`order_id`),
     FOREIGN KEY (`item_id`) REFERENCES items(`item_id`)
 );
 
