@@ -11,6 +11,8 @@ import com.qa.ims.persistence.domain.Domain;
 import com.qa.ims.utils.DBUtils;
 import com.qa.ims.utils.Utils;
 
+import java.io.File;
+
 public class IMS {
 
 	public static final Logger LOGGER = LogManager.getLogger();
@@ -53,6 +55,12 @@ public class IMS {
 				break;
 			case ORDER:
 				break;
+			case INIT:
+				File file = new File("src/main/resources/sql-schema.sql");
+				String schemaPath = file.getAbsolutePath();
+				int fileModified = DBUtils.connect().init(schemaPath);
+				LOGGER.info("Number of SQL file executed: " + fileModified);
+				return;
 			case STOP:
 				return;
 			default:
