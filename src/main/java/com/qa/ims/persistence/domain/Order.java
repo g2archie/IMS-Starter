@@ -1,40 +1,40 @@
 package com.qa.ims.persistence.domain;
 
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Order {
-    private Long order_Id;
-    private Long cust_id;
-    private Date order_Date;
+    private Long orderId;
+    private Long customerId;
+    private Date orderDate;
 
-    public Order(Long order_Id, Long cust_id, Date order_Date) {
-        this.setOrder_Id(order_Id);
-        this.setOrder_Date(order_Date);
-        this.setCust_id(cust_id);
+    public Order(Long orderId, Long customerId, Date orderDate) {
+        this.setOrderId(orderId);
+        this.setOrderDate(orderDate);
+        this.setCustomerId(customerId);
     }
 
-    public Long getOrder_Id() {
-        return order_Id;
+    public Long getOrderId() {
+        return orderId;
     }
 
-    public void setOrder_Id(Long order_Id) {
-        this.order_Id = order_Id;
+    public void setOrderId(Long orderId) {
+        this.orderId = orderId;
     }
 
-    public Long getCust_id() {
-        return cust_id;
+    public Long getCustomerId() {
+        return customerId;
     }
 
-    public void setCust_id(Long cust_id) {
-        this.cust_id = cust_id;
+    public void setCustomerId(Long customerId) {
+        this.customerId = customerId;
     }
 
-    public Date getOrder_Date() {
-        return order_Date;
+    public Date getOrderDate() {
+        return orderDate;
     }
 
-    public void setOrder_Date(Date order_Date) {
-        this.order_Date = order_Date;
+    public void setOrderDate(Date orderDate) {
+        this.orderDate = orderDate;
     }
 }

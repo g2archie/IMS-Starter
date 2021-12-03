@@ -3,21 +3,27 @@ package com.qa.ims.persistence.domain;
 import java.math.BigDecimal;
 
 public class Item {
-    private Long item_Id;
+    private Long itemId;
     private String name;
     private BigDecimal price;
+
+    public Item(Long itemId, String name, BigDecimal price) {
+        this.setItemId(itemId);
+        this.setName(name);
+        this.setPrice(price);
+    }
 
     public Item(String name, BigDecimal price) {
         this.setName(name);
         this.setPrice(price);
     }
 
-    public long getItem_Id() {
-        return item_Id;
+    public long getItemId() {
+        return itemId;
     }
 
-    public void setItem_Id(long item_Id) {
-        this.item_Id = item_Id;
+    public void setItemId(long itemId) {
+        this.itemId = itemId;
     }
 
     public String getName() {
@@ -38,7 +44,7 @@ public class Item {
 
     @Override
     public String toString() {
-        return "id:" + item_Id + " name:" + name + " price:" + price;
+        return "id:" + itemId + " name:" + name + " price:" + price;
     }
 
     @Override
@@ -46,7 +52,7 @@ public class Item {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((name == null) ? 0 : name.hashCode());
-        result = prime * result + ((item_Id == null) ? 0 : item_Id.hashCode());
+        result = prime * result + ((itemId == null) ? 0 : itemId.hashCode());
         result = prime * result + ((price == null) ? 0 : price.hashCode());
         return result;
     }
@@ -65,10 +71,10 @@ public class Item {
                 return false;
         } else if (!getName().equals(other.getName()))
             return false;
-        if (item_Id == null) {
-            if (other.item_Id != null)
+        if (itemId == null) {
+            if (other.itemId != null)
                 return false;
-        } else if (!item_Id.equals(other.item_Id))
+        } else if (!itemId.equals(other.itemId))
             return false;
         if (price == null) {
             if (other.price != null)
