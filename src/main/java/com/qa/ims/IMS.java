@@ -1,5 +1,7 @@
 package com.qa.ims;
 
+import com.qa.ims.controller.ItemController;
+import com.qa.ims.persistence.dao.ItemDAO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -11,17 +13,26 @@ import com.qa.ims.persistence.domain.Domain;
 import com.qa.ims.utils.DBUtils;
 import com.qa.ims.utils.Utils;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
 public class IMS {
 
 	public static final Logger LOGGER = LogManager.getLogger();
 
 	private final CustomerController customers;
+	private final ItemController items;
 	private final Utils utils;
 
 	public IMS() {
 		this.utils = new Utils();
 		final CustomerDAO custDAO = new CustomerDAO();
+		final ItemDAO itemDAO = new ItemDAO();
+		DBUtils.connect();
+		DBUtils.getInstance().executeSQLFile("C:\\Users\\Admin\\IdeaProjects\\IMS-Starter\\src\\main\\resources\\sql-schema.sql");
 		this.customers = new CustomerController(custDAO, utils);
+		this.items = new ItemController(itemDAO, utils);
 	}
 
 	public void imsSystem() {
@@ -50,6 +61,7 @@ public class IMS {
 				active = this.customers;
 				break;
 			case ITEM:
+				active = this.items;
 				break;
 			case ORDER:
 				break;
