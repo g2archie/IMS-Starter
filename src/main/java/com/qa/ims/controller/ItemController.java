@@ -1,17 +1,12 @@
 package com.qa.ims.controller;
 
-import com.qa.ims.persistence.dao.CustomerDAO;
 import com.qa.ims.persistence.dao.ItemDAO;
-import com.qa.ims.persistence.domain.Customer;
 import com.qa.ims.persistence.domain.Item;
 import com.qa.ims.utils.Utils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.math.BigDecimal;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.List;
 
 /**
@@ -20,13 +15,10 @@ import java.util.List;
  */
 public class ItemController implements CrudController<Item> {
 
-	public Connection connection;
-	public PreparedStatement statement;
-	ResultSet resultSet;
 	public static final Logger LOGGER = LogManager.getLogger();
 
-	private ItemDAO itemDAO;
-	private Utils utils;
+	private final ItemDAO itemDAO;
+	private final Utils utils;
 
 	public ItemController(ItemDAO itemDAO, Utils utils) {
 		super();
@@ -69,7 +61,7 @@ public class ItemController implements CrudController<Item> {
 		String name = utils.getString();
 		LOGGER.info("Please enter a price");
 		BigDecimal price = new BigDecimal(utils.getString());
-		Item item = itemDAO.update(new Item(name, price));
+		Item item = itemDAO.update(new Item(id, name, price));
 		LOGGER.info("item Updated");
 		return item;
 	}
@@ -81,9 +73,9 @@ public class ItemController implements CrudController<Item> {
 	 */
 	@Override
 	public int delete() {
-		LOGGER.info("Please enter the id of the customer you would like to delete");
+		LOGGER.info("Please enter the id of the item you would like to delete");
 		Long id = utils.getLong();
-		return customerDAO.delete(id);
+		return itemDAO.delete(id);
 	}
 
 }

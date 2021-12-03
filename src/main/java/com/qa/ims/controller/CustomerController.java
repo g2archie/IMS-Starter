@@ -1,12 +1,7 @@
 package com.qa.ims.controller;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
-import com.qa.ims.utils.DBUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -16,74 +11,70 @@ import com.qa.ims.utils.Utils;
 
 /**
  * Takes in customer details for CRUD functionality
- *
  */
 public class CustomerController implements CrudController<Customer> {
 
-	public Connection connection;
-	public PreparedStatement statement;
-	ResultSet resultSet;
-	public static final Logger LOGGER = LogManager.getLogger();
+    public static final Logger LOGGER = LogManager.getLogger();
 
-	private CustomerDAO customerDAO;
-	private Utils utils;
+    private final CustomerDAO customerDAO;
+    private final Utils utils;
 
-	public CustomerController(CustomerDAO customerDAO, Utils utils) {
-		super();
-		this.customerDAO = customerDAO;
-		this.utils = utils;
-	}
+    public CustomerController(CustomerDAO customerDAO, Utils utils) {
+        super();
+        this.customerDAO = customerDAO;
+        this.utils = utils;
+    }
 
-	/**
-	 * Reads all customers to the logger
-	 */
-	@Override
-	public List<Customer> readAll() {
-		List<Customer> customers = customerDAO.readAll();
-		for (Customer customer : customers) {
-			LOGGER.info(customer);
-		}
-		return customers;
-	}
+    /**
+     * Reads all customers to the logger
+     */
+    @Override
+    public List<Customer> readAll() {
+        List<Customer> customers = customerDAO.readAll();
+        for (Customer customer : customers) {
+            LOGGER.info(customer);
+        }
+        return customers;
+    }
 
-	/**
-	 * Creates a customer by taking in user input
-	 */
-	@Override
-	public Customer create() {
-		LOGGER.info("Please enter a first name");
-		String firstName = utils.getString();
-		LOGGER.info("Please enter a surname");
-		String surname = utils.getString();
-		return customerDAO.create(new Customer(firstName, surname));
-	}
+    /**
+     * Creates a customer by taking in user input
+     */
+    @Override
+    public Customer create() {
+        LOGGER.info("Please enter a first name");
+        String firstName = utils.getString();
+        LOGGER.info("Please enter a surname");
+        String surname = utils.getString();
+        return customerDAO.create(new Customer(firstName, surname));
+    }
 
-	/**
-	 * Updates an existing customer by taking in user input
-	 */
-	@Override
-	public Customer update() {
-		LOGGER.info("Please enter the id of the customer you would like to update");
-		Long id = utils.getLong();
-		LOGGER.info("Please enter a first name");
-		String firstName = utils.getString();
-		LOGGER.info("Please enter a surname");
-		String surname = utils.getString();
-		Customer customer = customerDAO.update(new Customer(id, firstName, surname));
-		LOGGER.info("Customer Updated");
-		return customer;
-	}
+    /**
+     * Updates an existing customer by taking in user input
+     */
+    @Override
+    public Customer update() {
+        LOGGER.info("Please enter the id of the customer you would like to update");
+        Long id = utils.getLong();
+        LOGGER.info("Please enter a first name");
+        String firstName = utils.getString();
+        LOGGER.info("Please enter a surname");
+        String surname = utils.getString();
+        Customer customer = customerDAO.update(new Customer(id, firstName, surname));
+        LOGGER.info("Customer Updated");
+        return customer;
+    }
 
-	/**
-	 * Deletes an existing customer by the id of the customer
-	 * 
-	 * @return
-	 */
-	@Override
-	public int delete() {
-		LOGGER.info("Please enter the id of the customer you would like to delete");
-		Long id = utils.getLong();
-		return customerDAO.delete(id);
-	}
+    /**
+     * Deletes an existing customer by the id of the customer
+     *
+     * @return
+     */
+    @Override
+    public int delete() {
+        LOGGER.info("Please enter the id of the customer you would like to delete");
+        Long id = utils.getLong();
+        return customerDAO.delete(id);
+    }
 
 }

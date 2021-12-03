@@ -27,7 +27,7 @@ public class ItemDAO implements Dao<Item>{
     public List<Item> readAll() {
         try (Connection connection = DBUtils.getInstance().getConnection();
              Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery("SELECT * FROM customers");) {
+             ResultSet resultSet = statement.executeQuery("SELECT * FROM items");) {
             List<Item> items = new ArrayList<>();
             while (resultSet.next()) {
                 items.add(modelFromResultSet(resultSet));
@@ -43,7 +43,7 @@ public class ItemDAO implements Dao<Item>{
     private Item readLatest() {
         try (Connection connection = DBUtils.getInstance().getConnection();
              Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery("SELECT * FROM items ORDER BY id DESC LIMIT 1");) {
+             ResultSet resultSet = statement.executeQuery("SELECT * FROM items ORDER BY item_id DESC LIMIT 1");) {
             resultSet.next();
             return modelFromResultSet(resultSet);
         } catch (Exception e) {
@@ -78,7 +78,7 @@ public class ItemDAO implements Dao<Item>{
     @Override
     public Item read(Long id) {
         try (Connection connection = DBUtils.getInstance().getConnection();
-             PreparedStatement statement = connection.prepareStatement("SELECT * FROM items WHERE id = ?");) {
+             PreparedStatement statement = connection.prepareStatement("SELECT * FROM items WHERE item_id = ?");) {
             statement.setLong(1, id);
             try (ResultSet resultSet = statement.executeQuery();) {
                 resultSet.next();
@@ -125,7 +125,7 @@ public class ItemDAO implements Dao<Item>{
     @Override
     public int delete(long id) {
         try (Connection connection = DBUtils.getInstance().getConnection();
-             PreparedStatement statement = connection.prepareStatement("DELETE FROM items WHERE id = ?");) {
+             PreparedStatement statement = connection.prepareStatement("DELETE FROM items WHERE item_id = ?");) {
             statement.setLong(1, id);
             return statement.executeUpdate();
         } catch (Exception e) {

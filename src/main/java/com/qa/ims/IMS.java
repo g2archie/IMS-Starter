@@ -1,5 +1,7 @@
 package com.qa.ims;
 
+import com.qa.ims.controller.ItemController;
+import com.qa.ims.persistence.dao.ItemDAO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -20,30 +22,17 @@ public class IMS {
 	public static final Logger LOGGER = LogManager.getLogger();
 
 	private final CustomerController customers;
+	private final ItemController items;
 	private final Utils utils;
 
 	public IMS() {
 		this.utils = new Utils();
 		final CustomerDAO custDAO = new CustomerDAO();
+		final ItemDAO itemDAO = new ItemDAO();
 		DBUtils.connect();
 		DBUtils.getInstance().executeSQLFile("C:\\Users\\Admin\\IdeaProjects\\IMS-Starter\\src\\main\\resources\\sql-schema.sql");
 		this.customers = new CustomerController(custDAO, utils);
-	}
-
-	/**
-	 * Establish an initial connection to the DB
-	 * returns a JDBC connection
-	 */
-	public Connection connectToDB() {
-		Connection connection = null;
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/world");
-			System.out.println("Database connected");
-		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
-		}
-		return connection;
+		this.items = new ItemController(itemDAO, utils);
 	}
 
 	public void imsSystem() {
@@ -72,6 +61,7 @@ public class IMS {
 				active = this.customers;
 				break;
 			case ITEM:
+				active = this.items;
 				break;
 			case ORDER:
 				break;
