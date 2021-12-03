@@ -11,6 +11,10 @@ import com.qa.ims.persistence.domain.Domain;
 import com.qa.ims.utils.DBUtils;
 import com.qa.ims.utils.Utils;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
 public class IMS {
 
 	public static final Logger LOGGER = LogManager.getLogger();
@@ -21,7 +25,24 @@ public class IMS {
 	public IMS() {
 		this.utils = new Utils();
 		final CustomerDAO custDAO = new CustomerDAO();
-		this.customers = new CustomerController(custDAO, utils);
+		Connection connection = connectToDB();
+		this.customers = new CustomerController(custDAO, utils, connection);
+	}
+
+	/**
+	 * Establish an initial connection to the DB
+	 * returns a JDBC connection
+	 */
+	public Connection connectToDB() {
+		Connection connection = null;
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/world","root","root");
+			System.out.println("Database connected");
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+		return connection;
 	}
 
 	public void imsSystem() {
