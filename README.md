@@ -1,7 +1,6 @@
-Coverage: 34%
 # IMS - Team Eccentric Predators
 
-One Paragraph of project description goes here
+Inventory Management System by Eccentric Predators.
 
 ## Getting Started
 
@@ -9,30 +8,35 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
+Database: Mysql
+JDK version: 8
+IDE(optional): Intellij
 
-First of all, clone the git repo.
+Install Mysql server on your local machine, and change the password of the root user.
+
+### Installing
+
+First, clone the git repo.
+
 ```
 git clone https://github.com/g2archie/IMS-Starter.git
 ```
 
-### Installing
-
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
-
+You will need to edit the db.properties accordingly.
 ```
-Give the example
+db.url=jdbc:mysql://localhost:3306/ims?serverTimezone=UTC
+db.user=root
+db.password=root
 ```
 
-And repeat
+You can run the application(src/main/java/Runner.java) directly using Intellij.
+
+or 
 
 ```
-until finished
+mvn package
+java -jar .\target\ims-0.0.1-jar-with-dependencies.jar
 ```
-
-End with an example of getting some data out of the system or using it for a little demo
 
 ## Running the tests
 
@@ -63,7 +67,6 @@ Give an example
 
 ## Deployment
 
-Add additional notes about how to deploy this on a live system
 
 ## Built With
 
