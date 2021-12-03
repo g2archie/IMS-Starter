@@ -2,24 +2,24 @@ package com.qa.ims.persistence.domain;
 
 
 public class OrderItems {
-    private Long ord_it_id;
+    private Long orderItemId;
     private Integer amount;
-    private Long order_id;
-    private Long item_id;
+    private Long orderId;
+    private Long itemId;
 
     public OrderItems(Long ord_it_id, Integer amount, Long order_id, Long item_id) {
-        this.setOrd_it_id(ord_it_id);
+        this.setOrderItemId(ord_it_id);
         this.setAmount(amount);
-        this.setOrder_id(order_id);
-        this.setItem_id(item_id);
+        this.setOrderId(order_id);
+        this.setItemId(item_id);
     }
 
-    public Long getOrd_it_id() {
-        return ord_it_id;
+    public Long getOrderItemId() {
+        return orderItemId;
     }
 
-    public void setOrd_it_id(Long ord_it_id) {
-        this.ord_it_id = ord_it_id;
+    public void setOrderItemId(Long orderItemId) {
+        this.orderItemId = orderItemId;
     }
 
     public Integer getAmount() {
@@ -30,19 +30,19 @@ public class OrderItems {
         this.amount = amount;
     }
 
-    public Long getOrder_id() {
-        return order_id;
+    public Long getOrderId() {
+        return orderId;
     }
 
-    public void setOrder_id(Long order_id) {
-        this.order_id = order_id;
+    public void setOrderId(Long orderId) {
+        this.orderId = orderId;
     }
 
-    public Long getItem_id() {
-        return item_id;
+    public Long getItemId() {
+        return itemId;
     }
 
-    public void setItem_id(Long item_id) {
-        this.item_id = item_id;
+    public void setItemId(Long itemId) {
+        this.itemId = itemId;
     }
 }
