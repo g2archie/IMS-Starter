@@ -58,7 +58,9 @@ public class IMS {
 			case INIT:
 				File file = new File("src/main/resources/sql-schema.sql");
 				String schemaPath = file.getAbsolutePath();
-				int fileModified = DBUtils.connect().init(schemaPath);
+				file = new File("src/main/resources/sql-data.sql");
+				String dataPath = file.getAbsolutePath();
+				int fileModified = DBUtils.connect().init(schemaPath, dataPath);
 				LOGGER.info("Number of SQL file executed: " + fileModified);
 				return;
 			case STOP:
