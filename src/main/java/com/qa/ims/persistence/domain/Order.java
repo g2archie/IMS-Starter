@@ -2,6 +2,7 @@ package com.qa.ims.persistence.domain;
 
 
 import java.sql.Date;
+import java.util.Calendar;
 
 public class Order {
     private Long orderId;
@@ -11,6 +12,19 @@ public class Order {
     public Order(Long orderId, Long customerId, Date orderDate) {
         this.setOrderId(orderId);
         this.setOrderDate(orderDate);
+        this.setCustomerId(customerId);
+    }
+
+    public Order(Long customerId) {
+        long currentDate = Calendar.getInstance().getTimeInMillis();
+        this.setOrderDate(new Date(currentDate));
+        this.setCustomerId(customerId);
+    }
+
+    public Order(Long orderId, Long customerId) {
+        this.setOrderId(orderId);
+        long currentDate = Calendar.getInstance().getTimeInMillis();
+        this.setOrderDate(new Date(currentDate));
         this.setCustomerId(customerId);
     }
 
