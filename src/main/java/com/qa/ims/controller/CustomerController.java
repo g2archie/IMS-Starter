@@ -2,8 +2,11 @@ package com.qa.ims.controller;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
+import com.qa.ims.utils.DBUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -18,17 +21,17 @@ import com.qa.ims.utils.Utils;
 public class CustomerController implements CrudController<Customer> {
 
 	public Connection connection;
-	public PreparedStatement statement = null;
+	public PreparedStatement statement;
+	ResultSet resultSet;
 	public static final Logger LOGGER = LogManager.getLogger();
 
 	private CustomerDAO customerDAO;
 	private Utils utils;
 
-	public CustomerController(CustomerDAO customerDAO, Utils utils, Connection connection) {
+	public CustomerController(CustomerDAO customerDAO, Utils utils) {
 		super();
 		this.customerDAO = customerDAO;
 		this.utils = utils;
-		this.connection = connection;
 	}
 
 	/**
@@ -52,15 +55,7 @@ public class CustomerController implements CrudController<Customer> {
 		String firstName = utils.getString();
 		LOGGER.info("Please enter a surname");
 		String surname = utils.getString();
-		Customer customer = customerDAO.create(new Customer(firstName, surname));
-
-		LOGGER.info("Customer created");
-		return customer;
-	}
-
-	private boolean persistCustomer(Customer customer) {
-		 String SQL = "";
-		 return false;
+		return customerDAO.create(new Customer(firstName, surname));
 	}
 
 	/**

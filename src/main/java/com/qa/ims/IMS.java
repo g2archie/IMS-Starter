@@ -25,8 +25,9 @@ public class IMS {
 	public IMS() {
 		this.utils = new Utils();
 		final CustomerDAO custDAO = new CustomerDAO();
-		Connection connection = connectToDB();
-		this.customers = new CustomerController(custDAO, utils, connection);
+		DBUtils.connect();
+		DBUtils.getInstance().executeSQLFile("C:\\Users\\Admin\\IdeaProjects\\IMS-Starter\\src\\main\\resources\\sql-schema.sql");
+		this.customers = new CustomerController(custDAO, utils);
 	}
 
 	/**
@@ -37,7 +38,7 @@ public class IMS {
 		Connection connection = null;
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/world","root","root");
+			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/world");
 			System.out.println("Database connected");
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
