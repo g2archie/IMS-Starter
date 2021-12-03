@@ -1,5 +1,5 @@
 Coverage: 34%
-# Project Title
+# IMS - Team Eccentric Predators
 
 One Paragraph of project description goes here
 
@@ -11,8 +11,9 @@ These instructions will get you a copy of the project up and running on your loc
 
 What things you need to install the software and how to install them
 
+First of all, clone the git repo.
 ```
-Give examples
+git clone https://github.com/g2archie/IMS-Starter.git
 ```
 
 ### Installing
@@ -42,7 +43,7 @@ Explain how to run the automated tests for this system. Break down into which te
 Explain what these tests test, why and how to run them
 
 ```
-Give an example
+mvn test
 ```
 
 ### Integration Tests 
